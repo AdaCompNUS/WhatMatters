@@ -1,0 +1,71 @@
+# Check vectornet.yaml for non-raster configuration docs
+log:
+  level: 'DEBUG'
+global_parameters:
+  trajectory_history_window_length: 20
+  trajectory_future_window_length: 30
+dataset: 'argo'
+global_path: '/home/cunjun/wuhr/moped_implementation/model/HOME'
+model_storage_path: '/home/cunjun/wuhr/moped_implementation/model/HOME/model_storage/argo/'
+data_process:
+  input_path: '../../../datasets'
+  output_path: 'internal'
+  n_processes: 1
+  visualize: False
+  parameters:
+    trajectory_min_history_window_length: 5
+    object_trajectory_min_history_window_length: 5
+    object_trajectory_min_future_window_length: 3
+    object_distance_threshold: 100
+    centerline_radius_scale: 3.0
+    add_neighboring_lanes: True
+    lane_radius_scale: 5.0
+    min_lane_radius: 50.0
+raster:
+  data_process:  # Data processing for HOME architecture
+    input_path: 'internal'  # Path to vectorized HD maps
+    output_path: 'internal_raster'  # Output path - only for testing
+    visualize: True  # Visualize - only for testing
+    debug_visualize: True
+    parameters:
+      agent_view_window_size: 224  # Agent does not see any objects outside its view (112 radius)
+      object_shape: [6, 6]  # Agent and neighbours object shape - shape drawn on input image
+      centerline_point_shape: [6, 6]  # Centerline object shape - shape drawn on input image
+      gauss_kernel_size: 25  # Gauss kernel for ground truth trajectory end point
+      gauss_kernel_sigma: 4
+      max_neighbours: 20  # Maximum number of neighbours (moving objects)
+      normalization_parameter: 25.0
+  train_tf:  # Training configuration to trajectory forecaster (one of two components)
+    train_input_path: 'internal/train'  # Path to train dataset
+    val_input_path: 'internal/val'  # Path to val dataset
+    output_path: 'model_storage/heatmap_tf'  # Path
+    n_workers: 16  # Dataloader workers
+    model_name: 'home-forecaster-baseline'  # Model (experiment) name
+    parameters:
+      epochs: 40  # Number of epochs for training
+      lr: 0.01  # Learning rate
+      batch_size: 128  # Batch size
+      sched_step: 10  # Learning rate scheduler
+      sched_gamma: 0.1
+  train_heatmap:
+    train_input_path: 'TODO'  # TODO: Hardcoded
+    val_input_path: 'TODO'  # TODO: Hardcoded
+    model_name: 'home-baseline'  # Model (experiment) name
+    n_workers: 16  # Dataloader workers
+    resume: True  # Resume from last checkpoint
+    starting_checkpoint_name: 'last.ckpt'  # Path to checkpoint in case the training is resumed
+    parameters:
+      epochs: 15  # Number of epochs for training
+      sampler_targets: 6  # Number of anchors (end point) to sample from heatmap (top k)
+      sampler_radius: 2  # Greedy sampling algorithm radius (check code for more information)
+      batch_size: 16  # Batch size
+      augmentation: True  # Use horizontal flip augmentation
+      base_lr: 0.001  # Learning rate
+      sched_step: 4  # Learning rate scheduler
+      sched_gamma: 0.5
+evaluation:
+  input_path: 'internal_graph'
+  output_path: 'result'
+  model_path: 'model_storage/vectornet_traj_scoring'
+  visualize: False
+

@@ -1,0 +1,30 @@
+
+syntax = "proto3";
+
+package agentinfo;
+
+service MotionPrediction{
+  rpc Predict(PredictionRequest) returns (PredictionResponse) {}
+
+}
+
+message AgentInfo {
+  repeated double x = 1;
+  repeated double y = 2;
+  sint32 agentId = 3;
+  sint32 agentType = 4;
+}
+
+message ProbabilityInfo {
+  double prob = 1;
+  sint32 agentId = 2;
+}
+
+message PredictionRequest {
+  repeated AgentInfo agentInfo = 1;
+}
+
+message PredictionResponse {
+  repeated AgentInfo agentInfo = 1;
+  repeated ProbabilityInfo probInfo = 2;
+}
