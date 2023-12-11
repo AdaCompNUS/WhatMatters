@@ -1,0 +1,29 @@
+<launch>
+  <arg name="address" default="127.0.0.1" />
+  <arg name="port" default="2000" />
+  <arg name="pyro_port" default="8100" />
+  <arg name="moped_pyro_port" default="8300" />
+  <arg name="map_location" default="meskel_square" />
+  <arg name="ego_control_mode" default="gamma" />
+  <arg name="ego_speed_control" default="vel" />
+  <arg name="random_seed" default="0" />
+  <arg name="num_car" default="0" />
+  <arg name="num_bike" default="0" />
+  <arg name="num_ped" default="0" />
+  <arg name="time_scale" default="1.0" />
+
+  <param name="address" type="string" value="$(arg address)" />
+  <param name="port" type="int" value="$(arg port)" />
+  <param name="map_location" type="string" value="$(arg map_location)" />
+  <param name="random_seed" type="int" value="$(arg random_seed)" />
+  
+  <node name="ego_vehicle_gammapy3" pkg="gamma_planner" type="ego_vehicle_gammapy3.py" output="screen">
+        <param name="pyro_port" value="$(arg pyro_port)"/>
+        <param name="moped_pyro_port" value="$(arg moped_pyro_port)"/>
+        <param name="control_mode" value="$(arg ego_control_mode)"/>
+        <param name="speed_control" value="$(arg ego_speed_control)"/>
+        <param name="crowd_range" value="120.0"/>
+        <param name="time_scale" value="$(arg time_scale)"/>
+  </node>
+
+</launch>
