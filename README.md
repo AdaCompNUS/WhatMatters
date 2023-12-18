@@ -111,8 +111,7 @@ catkin config --merge-devel
 catkin clean
 catkin build
 ```
-
-After building catkin workspace, exit the docker setup with Ctrl+d
+(Ignore the typeError of the signal handler) After building catkin workspace, exit the docker setup with Ctrl+d
 
 ## Get a new docker for executing DESPOT and RVO Planner
 
