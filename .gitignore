@@ -143,9 +143,6 @@ dmypy.json
 *.la
 *.a
 
-# Ignore dataset
-*.txt
-
 # Ignore idea file
 .idea/
 
@@ -166,10 +163,12 @@ summit_map/map_files/pruned*
 *.swp
 *.swo
 *.pyc
-*.txt
 
 **/moped_implementation
 **/build/
+.catkin_tools/
+devel/
+logs/
 **/cmake-build-debug/
 **/experiment_notebook_wuhr/*.png
 **/experiment_notebook_wuhr/*.pickle

@@ -89,7 +89,24 @@ export OMP_NUM_THREADS=1
 For training DSP, run the scripts to generate the preprocess data.
 
 ## Getting Motion Planning Performance
-Go to [Summit Release](https://adacompnus.github.io/summit-docs/references/releases/) and choose 0.9.8f (non-lite version) to download. Unzip and put in the home folder ~/summit
+Go to [Summit Release](https://adacompnus.github.io/summit-docs/references/releases/) and choose the right version for your operating system: 
+- 0.9.8f (non-lite version) for Ubuntu 20.04
+- 0.9.8e (non-lite version) for Ubuntu 18.04 (the version where the experiment was conducted)
+
+Unzip and put in the home folder ~/summit
+
+## Set up catkin workspace
+
+Run
+```bash
+cd && mkdir whatmatters
+cd whatmatters
+git clone https://github.com/AdaCompNUS/WhatMatters
+cd WhatMatters
+mv * ../
+mv .git .gitignore ../
+rm -rf WhatMatters
+```
 
 ## Set up Docker
 
@@ -97,11 +114,13 @@ Go to [Summit Release](https://adacompnus.github.io/summit-docs/references/relea
 docker pull cppmayo/melodic_cuda10_1_cudnn7_libtorch_opencv4_ws_noentry
 ```
 
+We also need to install docker-nvidia2 as followed guide (https://developer.nvidia.com/blog/gpu-containers-runtime/)
+
 ## Build code
 
 ```bash
 cd ~/src/scripts
-python launch_docker.py --image cppmayo/melodic_cuda10_1_cudnn7_libtorch_opencv4_ws_noentry
+python3 launch_docker.py --image cppmayo/melodic_cuda10_1_cudnn7_libtorch_opencv4_ws_noentry
 ```
 
 Inside docker, run:
