@@ -1,0 +1,7 @@
+*/__pycache__/*
+*~
+*/*.pyc
+log/*
+data_argo/features*
+results/*
+saved_models/*

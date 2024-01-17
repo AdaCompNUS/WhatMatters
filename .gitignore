@@ -164,7 +164,6 @@ summit_map/map_files/pruned*
 *.swo
 *.pyc
 
-**/moped_implementation
 **/build/
 .catkin_tools/
 devel/
