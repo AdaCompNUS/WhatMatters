@@ -14,7 +14,7 @@ conda_path = home+"/anaconda3"
 if not os.path.isdir(catkin_ws_path):
     catkin_ws_path = home + '/whatmatters'
 
-result_path = home + '/driving_data'
+result_path = home + '/whatmatters/driving_data'
 
 
 # check whether the folders exist:

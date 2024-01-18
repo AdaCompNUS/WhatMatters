@@ -90,7 +90,6 @@ For training DSP, run the scripts to generate the preprocess data.
 
 ## Getting Motion Planning Performance
 Go to [Summit Release](https://adacompnus.github.io/summit-docs/references/releases/) and choose the right version for your operating system: 
-- 0.9.8f (non-lite version) for Ubuntu 20.04
 - 0.9.8e (non-lite version) for Ubuntu 18.04 (the version where the experiment was conducted)
 
 Unzip and put in the home folder ~/summit
@@ -106,6 +105,31 @@ cd WhatMatters
 mv * ../
 mv .git .gitignore ../
 rm -rf WhatMatters
+```
+
+## Moving synchronous file to ~/summit folder
+```bash
+cd && mkdir whatmatters
+cd whatmatters
+mv gamma_crowd_gammaplanner.py ~/summit/PythonAPI/examples/
+```
+
+## Downloading imagery inside summit
+```bash
+cd && mkdir whatmatters
+cd whatmatters
+cd ~/src/scripts
+python3 launch_docker.py --image cppmayo/melodic_cuda10_1_cudnn7_libtorch_opencv4_ws_noentry
+cd summit/Scripts
+pip3 install requests
+python3 download_imagery.py -d meskel_square
+python3 download_imagery.py -d beijing
+python3 download_imagery.py -d highway
+python3 download_imagery.py -d chandni_chowk
+python3 download_imagery.py -d magic
+python3 download_imagery.py -d shibuya
+python3 download_imagery.py -d shi_men_er_lu
+
 ```
 
 ## Set up Docker
