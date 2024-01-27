@@ -442,7 +442,7 @@ class EgoVehicle(Summit):
 
     def update_gamma_control(self):
         if PRINT_LOG:
-            print('{} [PHONG] Ego_vehicle.py update_gamma_control() function'.format(output_time()))
+            print('{} [DEBUG] Ego_vehicle.py update_gamma_control() function'.format(output_time()))
 
         gamma = carla.RVOSimulator()
 

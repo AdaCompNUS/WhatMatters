@@ -25,8 +25,7 @@ logging.basicConfig(
 )
 
 home = expanduser("~")
-#root_path = os.path.join(home, 'driving_data/lanegcn_005Hz_decentralized_1threads')
-root_path = os.path.join(home, 'driving_data/official/gamma_planner_path1_vel3/lstmsocial5Hz')
+root_path = os.path.join(home, 'driving_data/gamma_planner/cv')
 
 
 if not os.path.isdir(root_path):
@@ -79,7 +78,7 @@ def parse_cmd_args():
                         help='GPU ID for hyp-despot')
     parser.add_argument('--t_scale',
                         type=float,
-                        default=0.1667,
+                        default=1.0,
                         # original 1.0,
                         # 3 times slower, 10Hz, t = 0.333 (cv/ca), Needs a bit slow down
                         # 6 times slower 5Hz, t= 0.1667 (knn default ~ 378),

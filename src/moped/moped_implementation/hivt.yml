@@ -1,4 +1,4 @@
-name: HiVT
+name: moped
 channels:
   - rusty1s
   - pytorch

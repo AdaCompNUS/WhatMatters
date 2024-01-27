@@ -9,7 +9,7 @@ catkin_ws_path = home + '/workspace/Context-POMDP'
 
 summit_path = home + "/summit"
 
-conda_path = home+"/anaconda3"
+conda_path = home+"/miniconda3"
 
 if not os.path.isdir(catkin_ws_path):
     catkin_ws_path = home + '/whatmatters'
@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
     # I add conda_path so as to use conda environment from host machine inside docker
     additional_mounts = "-v " + catkin_ws_path + ":/root/catkin_ws -v " + summit_path + ":/root/summit " + \
-        "-v " + conda_path + ":/home/phong/anaconda3 " + "-v /home/phong/.ros:/root/.ros "
+        "-v " + conda_path + ":/home/tbaphong/miniconda3 " + "-v /home/tbaphong/.ros:/root/.ros "
 
     cmd_args = "docker run --rm --runtime=nvidia -it --network host " + \
                 "-v " + result_path + ":/root/driving_data " + \

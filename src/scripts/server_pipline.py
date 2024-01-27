@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--mode',
                         type=str,
-                        default='gamma',
+                        default='joint_pomdp', #'gamma' or 'joint_pomdp' only
                         help='driving mode')
 
     parser.add_argument('--record',

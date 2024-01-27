@@ -157,6 +157,26 @@ catkin build
 (Ignore the type error of the signal handler) 
 After building catkin workspace, exit the docker setup with Ctrl+d
 
+## Get the conda environment
+Install either conda or miniconda. If you install conda, then at line 12 in `src/scripts/launch_docker.py`, you need to change to `anaconda3`, if miniconda then
+you change to `miniconda3`
+
+```bash
+cd src/moped/moped_impelmentation/
+conda create env --name moped -f hivt.yml
+```
+
+## Get argoverse-api
+```bash
+cd ~/whatmatters
+git clone https://github.com/argoai/argoverse-api.git
+pip install -e argoverse-api
+pip install Pyro4
+pip install mmcv==1.7.1
+```
+Noting that if you got error in install sklearn, editting setup.py insie argoverse-api to change to scikit-learn.
+And if you have issue with lapsolver, use command `pip install cmake` then reinstalling
+
 ## Get a new docker for executing DESPOT and RVO Planner
 
 ```bash

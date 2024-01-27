@@ -1,4 +1,3 @@
-
 # shelang line is necsssary to run the scripts using subprocess so we do not need to activate conda environments
 import sys
 import os
@@ -10,9 +9,9 @@ import numpy as np
 from model.argoverse_baseline.constant_velocity import ConstantVelocityPlanner
 from model.argoverse_baseline.constant_acceleration import ConstantAccelerationPlanner
 from simulator.knearestneighbor.knn_planner import KNNPlanner
-#from simulator.LSTM.lstm_simulator import LSTM
-#from simulator.LaneGCN.lanegcn_simulator import LaneGCN
-#from simulator.HiVT.hivt_simulator import HiVT
+from simulator.LSTM.lstm_simulator import LSTM
+from simulator.LaneGCN.lanegcn_simulator import LaneGCN
+from simulator.HiVT.hivt_simulator import HiVT
 
 import logging
 import time
@@ -30,16 +29,16 @@ MAX_HISTORY_MOTION_PREDICTION = 20 # This value is same in moped_param.h
 class PlannerWrapper():
     def __init__(self, pred_len = 30):
         self.pred_len = pred_len
-        #self.cv = ConstantVelocityPlanner() #Run okay with pred_len
+        self.cv = ConstantVelocityPlanner() #Run okay with pred_len
         #self.ca = ConstantAccelerationPlanner() #Run okay with pred_len
         #self.laneGCN = LaneGCN(self.get_most_free_gpu_device()) # Always return 30, no need to do anything
         #self.hivt = HiVT() # Alwasy return 30, no need to do anything
-        # self.knn_default = KNNPlanner(use_social=False)
-        self.knn_social = KNNPlanner(use_social=True)
+        #self.knn_default = KNNPlanner(use_social=False)
+        #self.knn_social = KNNPlanner(use_social=True)
         #self.lstm_default = LSTM(use_social=False)
         #self.lstm_social = LSTM(use_social=True)
 
-        self.model_running = self.knn_social.__class__.__name__
+        self.model_running = self.cv.__class__.__name__
 
     def get_most_free_gpu_device(self):
         # Get the list of GPUs via nvidia-smi
@@ -149,12 +148,12 @@ class PlannerWrapper():
         '''
         #assert len(obs_trajectory.shape) == 3 and obs_trajectory.shape[1] == MAX_HISTORY_MOTION_PREDICTION and obs_trajectory.shape[2] == 2
 
-        #probs, preds = self.constant_velocity(obs_trajectory)
+        probs, preds = self.constant_velocity(obs_trajectory)
         #probs, preds = self.constant_acceleration(obs_trajectory)
         #probs, preds = self.lstm_default_prediction(obs_trajectory)
         #probs, preds = self.lstm_social_prediction(obs_trajectory)
         #probs, preds = self.knn_default_prediction(obs_trajectory)
-        probs, preds = self.knn_social_prediction(obs_trajectory)
+        #probs, preds = self.knn_social_prediction(obs_trajectory)
         #probs, preds = self.hivt_prediction(obs_trajectory)
         #probs, preds = self.lanegcn_prediction(obs_trajectory)
 

@@ -1,5 +1,4 @@
-#!/home/phong/anaconda3/envs/HiVT/bin/python
-
+#!/home/tbaphong/miniconda3/envs/moped/bin/python3
 
 # Copyright 2015 gRPC authors.
 #
@@ -35,6 +34,7 @@ import multiprocessing
 import torch
 
 _THREAD_CONCURRENCY = multiprocessing.cpu_count()
+
 
 
 MAX_HISTORY_MOTION_PREDICTION = 20
@@ -132,7 +132,7 @@ def _reserve_port():
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
     if sock.getsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT) == 0:
         raise RuntimeError("Failed to set SO_REUSEPORT.")
-    sock.bind(("", 50056))
+    sock.bind(("", 50051))
     try:
         yield sock.getsockname()[1]
     finally:
